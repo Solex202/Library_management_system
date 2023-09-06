@@ -12,8 +12,7 @@ public class Library {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Book book;
-    private Shelf shelf;
+//    private Shelf shelf;
     private String name;
 
 

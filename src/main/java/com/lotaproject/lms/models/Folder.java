@@ -13,6 +13,6 @@ public class Folder {
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
      private String name;
-     private List<Book> books;
+
      private String category;
 }
