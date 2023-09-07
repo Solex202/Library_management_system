@@ -46,7 +46,6 @@ class BookServiceImplTest {
         assertThrows(LmsException.class, ()-> bookService.createBook(book));
 
     }
-
     @Test
     void findBookByAdd(){
         Book book = bookService.findBookById(1L);

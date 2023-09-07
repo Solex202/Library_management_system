@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class FolderServiceImplTest {
-
     @Autowired
     private FolderService folderService;
 
@@ -20,6 +19,7 @@ class FolderServiceImplTest {
     void createFolder() {
         String name = "documents";
         Folder folder = folderService.createFolder(name);
+        assertNotNull(folder);
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.lotaproject.lms.services;
 
+import com.lotaproject.lms.exceptions.ExceptionMessages;
 import com.lotaproject.lms.exceptions.LmsException;
 import com.lotaproject.lms.models.Book;
 import com.lotaproject.lms.models.Folder;
@@ -12,6 +13,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.lotaproject.lms.exceptions.ExceptionMessages.*;
+
 @Service
 public class FolderServiceImpl implements FolderService{
 
@@ -22,15 +25,15 @@ public class FolderServiceImpl implements FolderService{
     private BookRepository bookRepository;
 
     private Book findBookById(Long bookId){
-        return bookRepository.findById(bookId).orElseThrow(()-> new LmsException("Book not found"));
+        return bookRepository.findById(bookId).orElseThrow(()-> new LmsException(String.format(BOOK_NOT_FOUND, bookId)));
     }
 
     private Folder findFolderById(Long folderId){
-        return folderRepository.findById(folderId).orElseThrow(()-> new LmsException("folder not found"));
+        return folderRepository.findById(folderId).orElseThrow(()-> new LmsException(FOLDER_NOT_FOUND));
     }
     @Override
     public Folder createFolder(String name) {
-        if(folderRepository.existsByName(name)) throw new LmsException("Folder already exists");
+        if(folderRepository.existsByName(name)) throw new LmsException(FOLDER_ALREADY_EXISTS);
 
         Folder folder = Folder.builder().name(name).createdDate(LocalDateTime.now())
                 .modifiedDate(LocalDateTime.now()).build();
@@ -41,15 +44,12 @@ public class FolderServiceImpl implements FolderService{
     public void addBookToFolder(Long folderId, List<Long> bookIds) {
         Folder folder =  findFolderById(folderId);
         List<Book> bookList = new ArrayList<>();
-//                .stream().forEach(b -> bookIds.);
 
-        for (Long bookId: bookIds) {
+        bookIds.forEach(bookId -> {
             Book book = findBookById(bookId);
             bookList.add(book);
-        }
-
+        });
         folder.setBookList(bookList);
         folderRepository.save(folder);
-
     }
 }

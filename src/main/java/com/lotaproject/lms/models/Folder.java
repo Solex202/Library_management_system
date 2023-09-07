@@ -20,7 +20,7 @@ public class Folder {
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
      private String name;
-     @OneToMany(mappedBy = "folder")
+     @OneToMany(cascade = CascadeType.ALL)
      private List<Book> bookList = new ArrayList<>();
      private LocalDateTime createdDate;
      private LocalDateTime modifiedDate;

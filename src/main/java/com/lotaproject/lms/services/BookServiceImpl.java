@@ -16,20 +16,23 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.lotaproject.lms.exceptions.ExceptionMessages.BOOK_ALREADY_EXISTS;
+import static com.lotaproject.lms.exceptions.ExceptionMessages.INVALID_ISBN;
+
 @Service
 @Slf4j
 public class BookServiceImpl implements BookService{
 
     @Autowired
     private BookRepository bookRepository;
-    private ModelMapper modelMapper;
+
     @Override
     public Book createBook(Book book) {
         if(bookRepository.existsByIsbn(book.getIsbn())){
-            throw new LmsException("Book with isbn already exists");
+            throw new LmsException(BOOK_ALREADY_EXISTS);
         }
         if(book.getIsbn().length() != 11){
-            throw new LmsException("Invalid ISBN length");
+            throw new LmsException(INVALID_ISBN);
         }
         book.setAddedDate(LocalDateTime.now());
         book.setModifiedDate(LocalDateTime.now());
