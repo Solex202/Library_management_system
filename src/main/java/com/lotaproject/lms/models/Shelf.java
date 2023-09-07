@@ -2,6 +2,7 @@ package com.lotaproject.lms.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Shelf {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +19,7 @@ public class Shelf {
     @OneToMany(mappedBy = "shelf")
     private List<Book> books = new ArrayList<>();
     private String category;
-//    private List<Folder> folder;
+    @ManyToOne()
+    @JoinColumn(name = "library_id")
+    private Library library;
 }

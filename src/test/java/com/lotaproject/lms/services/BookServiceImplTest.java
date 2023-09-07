@@ -27,7 +27,7 @@ class BookServiceImplTest {
         Book book = new Book();
         book.setAuthor("author");
         book.setName("The book");
-        book.setIsbn("12345678901");
+        book.setIsbn("12345678909");
 
         Book newBook = bookService.createBook(book);
         assertAll(
@@ -41,7 +41,7 @@ class BookServiceImplTest {
         Book book = new Book();
         book.setAuthor("author");
         book.setName("The book");
-        book.setIsbn("1234567");
+        book.setIsbn("12345678901");
 
         assertThrows(LmsException.class, ()-> bookService.createBook(book));
 

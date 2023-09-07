@@ -24,6 +24,9 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "shelf_id")
     private Shelf shelf;
+    @ManyToOne
+    @JoinColumn(name = "folder_id")
+    private Folder folder;
     private LocalDateTime addedDate;
-    private LocalDateTime modifiedDate;;;;;;;;;;;;;;;;;;;;;;;;
+    private LocalDateTime modifiedDate;
 }
