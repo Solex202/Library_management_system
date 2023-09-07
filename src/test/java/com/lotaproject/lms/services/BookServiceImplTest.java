@@ -1,5 +1,7 @@
 package com.lotaproject.lms.services;
 
+import com.lotaproject.lms.dto.response.PaginatedBookResponse;
+import com.lotaproject.lms.exceptions.LmsException;
 import com.lotaproject.lms.models.Book;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,8 +37,29 @@ class BookServiceImplTest {
     }
 
     @Test
+    void cannot_createBook_if_isbn_is_not_valid(){
+        Book book = new Book();
+        book.setAuthor("author");
+        book.setName("The book");
+        book.setIsbn("1234567");
+
+        assertThrows(LmsException.class, ()-> bookService.createBook(book));
+
+    }
+
+    @Test
     void findBookByAdd(){
         Book book = bookService.findBookById(1L);
+        assertAll(
+                ()->  assertNotNull(book),
+                ()-> assertThat(book.getName(), is("The book"))
+        );
+    }
+
+    @Test
+    void findAll(){
+        PaginatedBookResponse response = bookService.findAllBooks(1 ,10);
+        assertThat(response.getNoOfBooks(),is(2));
     }
     @AfterEach
     void tearDown() {

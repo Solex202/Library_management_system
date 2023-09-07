@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.ISBN;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -22,4 +24,6 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "shelf_id")
     private Shelf shelf;
+    private LocalDateTime addedDate;
+    private LocalDateTime modifiedDate;;;;;;;;;;;;;;;;;;;;;;;;
 }
