@@ -2,6 +2,7 @@ package com.lotaproject.lms.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data
+@Builder
 public class Folder {
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)

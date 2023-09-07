@@ -31,10 +31,9 @@ public class FolderServiceImpl implements FolderService{
     @Override
     public Folder createFolder(String name) {
         if(folderRepository.existsByName(name)) throw new LmsException("Folder already exists");
-        Folder folder = new Folder();
-        folder.setName(name);
-        folder.setCreatedDate(LocalDateTime.now());
-        folder.setModifiedDate(LocalDateTime.now());
+
+        Folder folder = Folder.builder().name(name).createdDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now()).build();
         return folderRepository.save(folder);
     }
 
