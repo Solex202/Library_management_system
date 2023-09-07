@@ -18,8 +18,15 @@ public class BookServiceImpl implements BookService{
         if(bookRepository.existsByIsbn(book.getIsbn())){
             throw new LmsException("Book with isbn already exists");
         }
+        if(book.getIsbn().length() != 11){
+            throw new LmsException("Invalid ISBN length");
+        }
 
-        Book newBook = bookRepository.save(book);
-        return newBook;
+        return bookRepository.save(book);
+    }
+
+    @Override
+    public Book findBookById(Long bookId) {
+        return bookRepository.findById(bookId).orElseThrow(()-> new LmsException("Book not found"));
     }
 }
