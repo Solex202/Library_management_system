@@ -1,5 +1,6 @@
 package com.lotaproject.lms.services;
 
+import com.lotaproject.lms.models.Library;
 import com.lotaproject.lms.models.Shelf;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,6 +46,20 @@ class ShelfServiceImplTest {
 
     @Test
     void addFolderToShelf(){
-        shelfService.addFolderToShelf(1L, 1L);
+        List<Long> ids = new ArrayList<>();
+        ids.add(1L);
+        shelfService.addFolderToShelf(1L, ids);
+    }
+
+    @Test
+    void createLibrary(){
+        Library library = shelfService.createLibrary("Enum library");
+    }
+
+    @Test
+    void addShelfToLibrary(){
+        List<Long> ids = new ArrayList<>();
+        ids.add(1L);
+        shelfService.addShelfToLibrary(1L, ids);
     }
 }

@@ -21,6 +21,9 @@ public class Shelf {
     private String name;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Folder> folders = new ArrayList<>();
     private String category;
     @ManyToOne()
     @JoinColumn(name = "library_id")

@@ -22,6 +22,10 @@ public class Folder {
      private String name;
      @OneToMany(cascade = CascadeType.ALL)
      private List<Book> bookList = new ArrayList<>();
+
+     @ManyToOne()
+     @JoinColumn(name = "shelf-id")
+     private Shelf shelf;
      private LocalDateTime createdDate;
      private LocalDateTime modifiedDate;
 
